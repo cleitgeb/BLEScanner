@@ -1,0 +1,14 @@
+{
+  "name": "BLEScanner",
+  "private": false,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "bufferutil": "^1.2.1",
+    "circular-json": "^0.3.0",
+    "meteor-node-stubs": "~0.2.0",
+    "noble": "*",
+    "utf-8-validate": "^1.2.1"
+  }
+}

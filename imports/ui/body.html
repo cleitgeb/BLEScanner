@@ -1,0 +1,16 @@
+<head>
+    <meta charset="UTF-8">
+    <title>GAT BLE-Scanner</title>
+</head>
+<body>
+    <div>
+        <header>
+            <h1>GAT BLE-Scanner - {{deviceCnt}} devices found</h1>
+        </header>
+    </div>
+    <div id="deviceWrapper">
+                {{#each devices}}
+                        {{> device}}
+                {{/each}}
+    </div>
+</body>
