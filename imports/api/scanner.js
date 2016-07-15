@@ -1,5 +1,6 @@
 //Import npm-Package
 import noble from 'noble';
+import { Meteor } from 'meteor/meteor';
 
 //Specific Service UID to filter
 var GATDeviceUID = Array('1111');
@@ -11,6 +12,16 @@ Devices.remove({});
 
 //store found physical devices and all data
 var PhyDevices = [];
+
+//Define methods which can be invoked from remote
+Meteor.methods({
+    //Calls local function
+    connectToDevice: function(number) {
+        lConnectToDevice(number);
+    }
+})
+
+//--------state handling-----------------------------------------
 
 if(noble.state == 'poweredOn'){
     console.log('1 -- scanning...');
@@ -34,7 +45,10 @@ noble.on('discover', Meteor.bindEnvironment(function (peripheral){
     addToKnownDevices(peripheral);
 }));
 
+//-------- end state handling-----------------------------------------
 
+
+//----------operative functions------------------------------------
 function addToKnownDevices (peripheral) {
     if(PhyDevices.indexOf(peripheral) == -1){
         PhyDevices.push(peripheral);
@@ -68,9 +82,8 @@ function addToKnownDevices (peripheral) {
 
 }
 
-
-//no specific function yet
-function connectToDevice(number){
+//Local Function for Connecting
+function lConnectToDevice(number){
     var device = PhyDevices[number];
     console.log("5 -- Connectable: " + device.connectable);
     if(device.connectable){
@@ -80,5 +93,7 @@ function connectToDevice(number){
     }
 
 }
+
+
 
 
